@@ -12,7 +12,7 @@ const CategoryController = {
     async getAll(req, res){
         try {
             const category = await Category.findAll()
-            res.status(200).send([{message:"Showing categories", category}])
+            res.status(200).send([{message:"Showing all categories", category}])
         } catch (err) {
             res.status(500).send({message: "There was an error", err})
         }

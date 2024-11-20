@@ -8,6 +8,14 @@ const ProductController = {
         } catch (err) {
             res.status(500).send({message: "There was an error", err})
         }
+    },
+    async getAll(req, res){
+        try {
+            const product = await Product.findAll()
+            res.status(201).send([{message:"Showing all products", product}])
+        } catch (err) {
+            res.status(500).send({message: "There was an error", err})
+        }
     }
 }
 
