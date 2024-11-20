@@ -16,6 +16,19 @@ const ProductController = {
         } catch (err) {
             res.status(500).send({message: "There was an error", err})
         }
+    },
+    async update(req, res) {
+        try {
+          await Product.update(req.body, {
+            where: {
+              id: req.params.id,
+            },
+          });
+          res.send({ message: "Product successfully updated" });
+        } catch (error) {
+          console.error(error);
+          res.status(500).send({ message: "There was a problem", error });
+        }
     }
 }
 
