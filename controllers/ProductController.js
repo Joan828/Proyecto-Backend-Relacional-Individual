@@ -55,6 +55,19 @@ const ProductController = {
         console.error(error);
         res.status(500).send({ message: "There was a problem", error });
         }
+    },
+    async getByName(req, res) {
+        try {
+        const product = await Product.findOne({
+            where: {
+            name: req.params.name,
+            }
+        });
+        res.send({ message: `Product find it`, product});
+        } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "There was a problem", error });
+        }
     }
 }
 
