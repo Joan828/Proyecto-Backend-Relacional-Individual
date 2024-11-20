@@ -7,6 +7,8 @@ router.get("/getAll",CategoryController.getAll)
 router.put("/update/:id",CategoryController.update)
 router.delete("/delete/:id",CategoryController.delete)
 router.get("/getCategoryById/:id",CategoryController.getById)
+router.get("/getCategoryByName/:name",CategoryController.getByName)
+
 
 
 
