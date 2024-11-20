@@ -5,6 +5,7 @@ const router = express.Router()
 router.post("/create",ProductController.create)
 router.get("/getAll",ProductController.getAll)
 router.put("/update/:id",ProductController.update)
+router.delete("/delete/:id",ProductController.delete)
 
 
 module.exports = router

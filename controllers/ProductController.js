@@ -29,7 +29,20 @@ const ProductController = {
           console.error(error);
           res.status(500).send({ message: "There was a problem", error });
         }
-    }
+    },
+    async delete(req, res) {
+        try {
+          await Product.destroy({
+            where: {
+              id: req.params.id,
+            }
+          });
+          res.send({ message: `Product with id ${req.params.id} deleted` });
+        } catch (error) {
+          console.error(error);
+          res.status(500).send({ message: "There was a problem", error });
+        }
+      }
 }
 
 module.exports = ProductController
