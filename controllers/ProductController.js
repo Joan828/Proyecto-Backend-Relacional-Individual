@@ -42,7 +42,20 @@ const ProductController = {
           console.error(error);
           res.status(500).send({ message: "There was a problem", error });
         }
-      }
+      },
+      async getById(req, res) {
+        try {
+        const product = await Product.findOne({
+            where: {
+            id: req.params.id,
+            }
+        });
+        res.send({ message: `Product find it`, product});
+        } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "There was a problem", error });
+        }
+    }
 }
 
 module.exports = ProductController
