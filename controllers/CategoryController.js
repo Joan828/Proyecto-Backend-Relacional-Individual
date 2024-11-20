@@ -29,8 +29,8 @@ const CategoryController = {
           console.error(error);
           res.status(500).send({ message: "There was a problem", error });
         }
-      },
-      async delete(req, res) {
+    },
+    async delete(req, res) {
             try {
               await Category.destroy({
                 where: {
@@ -42,7 +42,20 @@ const CategoryController = {
               console.error(error);
               res.status(500).send({ message: "There was a problem", error });
             }
-          }
+          },
+    async getById(req, res) {
+        try {
+        const category = await Category.findOne({
+            where: {
+            id: req.params.id,
+            }
+        });
+        res.send({ message: `Category find it`, category});
+        } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "There was a problem", error });
+        }
+    }     
 }
 
 module.exports = CategoryController
