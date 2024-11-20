@@ -4,7 +4,7 @@ const router = express.Router()
 
 router.post("/create",UserController.create)
 router.get("/getAll",UserController.getAll)
-router.put("/create",UserController.update)
+router.put("/update/:id",UserController.update)
 
 
 module.exports = router
