@@ -81,6 +81,16 @@ const ProductController = {
         console.error(error);
         res.status(500).send({ message: "There was a problem", error });
         }
+    },
+    async orderByPriceD(req, res){
+        try {
+            const product = await Product.findAll({
+                order:[["price", "DESC"]]
+            })
+            res.status(200).send([{message:"Showing all products order by price:", product}])
+        } catch (err) {
+            res.status(500).send({message: "There was an error", err})
+        }
     }
 
 }
