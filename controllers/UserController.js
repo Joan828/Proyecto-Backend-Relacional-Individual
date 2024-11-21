@@ -1,9 +1,11 @@
 const {User} = require("../models/index")
+const bcrypt = require ('bcryptjs');
 
 const UserController = {
     async create(req, res){
         try{
-            const user = await User.create(req.body)
+            const password = bcrypt.hashSync(req.body.password,10)
+            const user = await User.create({...req.body, password:password, role:"user"})
             res.status(201).send({message:"User created successfully",user})
         }catch(err){
             console.log(err);
@@ -63,7 +65,6 @@ const UserController = {
           return res.status(400).send({ message: "Incorrect email or password" });
         }
         const isMatch = await bcrypt.compare(req.body.password, user.password);
-        // const isMatch = await bcrypt.compare("quieromuchoamitia","$10$wzRkyjrV30ay3tgFr.k/6OJ8VhZdBhKTf9t/tIfU0MYhktoTzgK6G")
         if (!isMatch) {
             return res.status(400).send({message: "Incorrect email or password"})
         }
