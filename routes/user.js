@@ -6,7 +6,8 @@ const {authentication} = require('../middleware/authentication')
 router.post("/create",UserController.create)
 router.get("/getAll",UserController.getAll)
 router.put("/update/:id",authentication, UserController.update)
-router.post("/login",UserController.login)
+router.post("/login", UserController.login)
+router.delete('/logout',authentication, UserController.logout)
 
 
 
