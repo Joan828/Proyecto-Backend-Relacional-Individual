@@ -56,6 +56,19 @@ const ProductController = {
         res.status(500).send({ message: "There was a problem", error });
         }
     },
+    async getByPrice(req, res) {
+        try {
+        const product = await Product.findOne({
+            where: {
+            price: req.params.price,
+            }
+        });
+        res.send({ message: `Product find it`, product});
+        } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "There was a problem", error });
+        }
+    },
     async getByName(req, res) {
         try {
         const product = await Product.findOne({
@@ -69,6 +82,7 @@ const ProductController = {
         res.status(500).send({ message: "There was a problem", error });
         }
     }
+
 }
 
 module.exports = ProductController
