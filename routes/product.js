@@ -12,8 +12,4 @@ router.get("/getByName/:name", ProductController.getByName)
 router.get("/getByPrice/:price", ProductController.getByPrice)
 router.get("/orderByPriceD", ProductController.orderByPriceD)
 
-
-
-
-
 module.exports = router
