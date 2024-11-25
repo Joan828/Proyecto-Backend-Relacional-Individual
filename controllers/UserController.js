@@ -1,4 +1,4 @@
-const {User, Token, Sequelize} = require("../models/index")
+const {User, Order, Token, Sequelize} = require("../models/index")
 const bcrypt = require ('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { jwt_secret } = require('../config/config.json')['development']
@@ -17,7 +17,9 @@ const UserController = {
     },
     async getAll(req, res) {
         try {
-          const users = await User.findAll();
+          const users = await User.findAll({
+            include: [{ model: Order, through: { attributes: [] } }],
+          });
           res.status(200).send({message: "Showing all the users", users});
         } catch (error) {
           console.error(error);

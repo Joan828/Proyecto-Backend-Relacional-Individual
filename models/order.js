@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
       Order.belongsToMany(models.Product,{
         through:models.OrderProduct
       })
+      Order.belongsTo(models.User)
     }
   }
   Order.init({
