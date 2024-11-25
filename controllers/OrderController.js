@@ -16,7 +16,15 @@ const OrderController = {
                 attributes:["description"],
                 include: { model: Product, attributes: ["name", "price"], through: { attributes: [] } },
             })
-            res.status(200).send([{message:"Showing all orders:", orders}])
+            // Aquí calculariamos el precio total de todos los pedidos
+            // let totalPrice = 0
+            // orders.forEach(element => {               
+            //     element.Products.forEach(e=>{
+            //         totalPrice += +e.dataValues.price                     
+            //     });
+                
+            // });
+            // res.status(200).send([{message:"Showing all orders:", orders, TotalOrdersPrice: totalPrice}])
         } catch (err) {
             console.log(err);
             
