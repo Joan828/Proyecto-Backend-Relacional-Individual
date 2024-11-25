@@ -9,6 +9,4 @@ app.use("/categories", require("./routes/category"))
 app.use("/products", require("./routes/product"))
 app.use("/orders", require("./routes/order"))
 
-
-
 app.listen(PORT)
