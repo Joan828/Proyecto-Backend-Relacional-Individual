@@ -7,6 +7,7 @@ const { Op } = Sequelize;
 const UserController = {
     async create(req, res){
         try{
+          if(!req.body.password) return res.status(400).send("Rellena tu contraseña")
             const password = bcrypt.hashSync(req.body.password,10)
             const user = await User.create({...req.body, password:password, role:"user"})
             res.status(201).send({message:"User created successfully",user})
