@@ -5,15 +5,14 @@ const { jwt_secret } = require('../config/config.json')['development']
 const { Op } = Sequelize;
 
 const UserController = {
-    async create(req, res){
+    async create(req, res, next){
         try{
           if(!req.body.password) return res.status(400).send("Rellena tu contraseña")
             const password = bcrypt.hashSync(req.body.password,10)
             const user = await User.create({...req.body, password:password, role:"user"})
             res.status(201).send({message:"User created successfully",user})
-        }catch(err){
-            console.log(err);
-            res.status(500).send({message:"There was a problem", err})
+        }catch(err){  
+            next(err)
         }
     },
     async getAll(req, res) {
