@@ -1,4 +1,4 @@
-const {User, Order, Product, OrderProduct, Token, Sequelize} = require("../models/index")
+const {User, Order, Product, Token, Sequelize} = require("../models/index")
 const bcrypt = require ('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { jwt_secret } = require('../config/config.json')['development']
@@ -16,23 +16,32 @@ const UserController = {
         }
     },
     async getAll(req, res) {
-        try {
-          const users = await User.findAll({
-            include: { 
-              attributes: ["description"],
-              model: Order, 
-              include:{
-                model: Product, 
-                attributes: ["name", "price"]
-              }
-             }
-          });
-          res.status(200).send({message: "Showing all the users", users});
-        } catch (error) {
-          console.error(error);
-          res.status(500).send({ message: "There was a problem", error });
-        }
-      },
+      try {
+        const users = await User.findAll();
+        res.status(200).send({message: "Showing all the users", users});
+      } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "There was a problem", error });
+      }
+    },
+    async getUserInfoLogged(req, res) {
+      try {
+        const user = await User.findByPk(req.user.id,{
+          include: { 
+            attributes: ["description"],
+            model: Order, 
+            include:{
+              model: Product, 
+              attributes: ["name", "price"]
+            }
+            }
+        });
+        res.status(200).send({message: "Showing all the users", user});
+      } catch (error) {
+        console.error(error);
+        res.status(500).send({ message: "There was a problem", error });
+      }
+    },
       // Aquí habría que hacer el delete de nuestro user, que tiene que borrar sus pedidos en vez de sus posts, como lo hace en este ejemplo
     //   async delete(req, res) {
     //     try {
